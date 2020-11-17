@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/UserInterface/Title.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UserInterface/PlayButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UserInterface/QuitButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Backgrounds/menu_background.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui_theme.tres" type="Theme" id=5]
+[ext_resource path="res://src/Screens/MiniGameButton.gd" type="Script" id=6]
+
+[node name="MainScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" parent="." instance=ExtResource( 1 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = -17.0
+margin_right = 237.0
+margin_bottom = 14.0
+text = "Codename: CoVID-19"
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = 24.0
+margin_right = 233.0
+margin_bottom = 178.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" parent="Menu" instance=ExtResource( 2 )]
+margin_right = 223.0
+margin_bottom = 37.0
+next_scene_path = "res://src/Levels/Tutorial_Level.tscn"
+
+[node name="LoadButton" type="Button" parent="Menu"]
+margin_top = 37.0
+margin_right = 223.0
+margin_bottom = 74.0
+text = "Continue"
+
+[node name="MiniGameButton" type="Button" parent="Menu"]
+margin_top = 74.0
+margin_right = 223.0
+margin_bottom = 111.0
+text = "Mini-Game"
+script = ExtResource( 6 )
+next_scene_path = "res://Scripts/Main.tscn"
+
+[node name="SettingsButton" type="Button" parent="Menu"]
+margin_top = 111.0
+margin_right = 223.0
+margin_bottom = 148.0
+text = "Settings"
+
+[node name="QuitButton" parent="Menu" instance=ExtResource( 3 )]
+margin_top = 148.0
+margin_right = 223.0
+margin_bottom = 185.0
+
+[node name="AudioEffect" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioEffect"]
+[connection signal="button_up" from="Menu/MiniGameButton" to="Menu/MiniGameButton" method="_on_MiniGameButton_button_up"]
